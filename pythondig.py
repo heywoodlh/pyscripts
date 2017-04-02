@@ -3,6 +3,14 @@ import sys
 import socket
 import dns.resolver
 
+if sys.argv[1].lower() == "help":
+	print(" ")
+	print("Arguments: [A, NS]")
+	print(" ")
+	print("Usage: 'python pythondig.py [A, NS] google.com facebook.com'")
+	print(" ") 
+	print("Example: 'python pythondig.py A google.com facebook.com'")
+
 if sys.argv[1].upper() == "NS":
 	myResolver = dns.resolver.Resolver()
 	for hosts in sys.argv[2:]:
