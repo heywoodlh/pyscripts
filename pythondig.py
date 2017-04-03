@@ -5,7 +5,7 @@ import dns.resolver
 import os
 import urllib2
 
-#and then check the response...
+#Check network connection
 def internet_on():
     try:
         urllib2.urlopen('http://google.com', timeout=1)
@@ -17,10 +17,9 @@ if not internet_on():
 	print("Unable to connect to network")
 	quit()
 
-def error_code():
-	print("Error. Unable to complete")
-	quit()
+#ARGUMENTS SECTION
 
+#help 
 if sys.argv[1].lower() == "help":
 	print(" ")
 	print("Arguments: [A, NS]")
@@ -30,6 +29,7 @@ if sys.argv[1].lower() == "help":
 	print("Example: 'python pythondig.py A google.com facebook.com'")
 	quit()
 
+#NS 
 if sys.argv[1].upper() == "NS":
 	myResolver = dns.resolver.Resolver()
 	for hosts in sys.argv[2:]:
@@ -37,10 +37,8 @@ if sys.argv[1].upper() == "NS":
 	for rdata in resolved_hosts:
 		print(rdata)
 	quit()
-else:
-	error_code()
 		
-
+#MX
 if sys.argv[1].upper() == "MX":
         myResolver = dns.resolver.Resolver()
         for hosts in sys.argv[2:]:
@@ -48,13 +46,9 @@ if sys.argv[1].upper() == "MX":
         for rdata in resolved_hosts:
                 print(rdata)
         quit()
-else:
-	error_code()
 
-
+#A
 if sys.argv[1].upper() == "A":
 	for hosts in sys.argv[2:]:
 		print(socket.gethostbyname(hosts))
 	quit()
-else:
-	error_code()
