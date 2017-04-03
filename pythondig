@@ -40,3 +40,11 @@ if argument in ("NS", "A", "TXT", "MX", "CNAME"):
 	for rdata in resolved_hosts:
 		print(rdata)
 	quit()
+else:
+        myResolver = dns.resolver.Resolver()
+        for hosts in sys.argv[1:]:
+                resolved_hosts = myResolver.query(hosts, "A")
+        for rdata in resolved_hosts:
+                print(rdata)
+        quit()
+
