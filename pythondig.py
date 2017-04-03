@@ -22,9 +22,9 @@ if not internet_on():
 #help 
 if sys.argv[1].lower() == "help":
 	print(" ")
-	print("Arguments: [A, NS]")
+	print("Arguments: [A, NS, TXT, MX, CNAME")
 	print(" ")
-	print("Usage: 'python pythondig.py [A, NS] google.com facebook.com'")
+	print("Usage: 'python pythondig.py [A, NS, TXT, MX, CNAME] google.com facebook.com'")
 	print(" ") 
 	print("Example: 'python pythondig.py A google.com facebook.com'")
 	quit()
@@ -52,3 +52,21 @@ if sys.argv[1].upper() == "A":
 	for hosts in sys.argv[2:]:
 		print(socket.gethostbyname(hosts))
 	quit()
+
+#TXT
+if sys.argv[1].upper() == "TXT":
+        myResolver = dns.resolver.Resolver()
+        for hosts in sys.argv[2:]:
+                resolved_hosts = myResolver.query(hosts, "TXT")
+        for rdata in resolved_hosts:
+                print(rdata)
+        quit()
+
+#CNAME
+if sys.argv[1].upper() == "CNAME":
+        myResolver = dns.resolver.Resolver()
+        for hosts in sys.argv[2:]:
+                resolved_hosts = myResolver.query(hosts, "CNAME")
+        for rdata in resolved_hosts:
+                print(rdata)
+        quit()
