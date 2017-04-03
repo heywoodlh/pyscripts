@@ -19,7 +19,6 @@ if not internet_on():
 	print("Unable to connect to network")
 	quit()
 
-#ARGUMENTS SECTION
 
 #help 
 if sys.argv[1].lower() == "help":
@@ -31,44 +30,13 @@ if sys.argv[1].lower() == "help":
 	print("Example: 'python pythondig.py A google.com facebook.com'")
 	quit()
 
-#NS 
-if sys.argv[1].upper() == "NS":
+
+argument = sys.argv[1].upper()
+ 
+if argument in ("NS", "A", "TXT", "MX", "CNAME"):
 	myResolver = dns.resolver.Resolver()
 	for hosts in sys.argv[2:]:
-		resolved_hosts = myResolver.query(hosts, "NS")
+		resolved_hosts = myResolver.query(hosts, argument)
 	for rdata in resolved_hosts:
 		print(rdata)
 	quit()
-		
-#MX
-if sys.argv[1].upper() == "MX":
-        myResolver = dns.resolver.Resolver()
-        for hosts in sys.argv[2:]:
-                resolved_hosts = myResolver.query(hosts, "MX")
-        for rdata in resolved_hosts:
-                print(rdata)
-        quit()
-
-#A
-if sys.argv[1].upper() == "A":
-	for hosts in sys.argv[2:]:
-		print(socket.gethostbyname(hosts))
-	quit()
-
-#TXT
-if sys.argv[1].upper() == "TXT":
-        myResolver = dns.resolver.Resolver()
-        for hosts in sys.argv[2:]:
-                resolved_hosts = myResolver.query(hosts, "TXT")
-        for rdata in resolved_hosts:
-                print(rdata)
-        quit()
-
-#CNAME
-if sys.argv[1].upper() == "CNAME":
-        myResolver = dns.resolver.Resolver()
-        for hosts in sys.argv[2:]:
-                resolved_hosts = myResolver.query(hosts, "CNAME")
-        for rdata in resolved_hosts:
-                print(rdata)
-        quit()
