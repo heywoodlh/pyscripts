@@ -7,45 +7,62 @@ import dns.resolver
 import os
 import urllib.request as urllib2
 
+try:
+    #Check network connection
+    def internet_on():
+        try:
+            urllib2.urlopen('http://google.com', timeout=1)
+            return True
+        except urllib2.URLError as err: 
+            return False
 
-#Check network connection
-def internet_on():
-    try:
-        urllib2.urlopen('http://google.com', timeout=1)
-        return True
-    except urllib2.URLError as err: 
-        return False
-
-if not internet_on():
-	print("Unable to connect to network")
-	quit()
-
-
-#help 
-if sys.argv[1].lower() == "help":
-	print(" ")
-	print("Arguments: [A, NS, TXT, MX, CNAME")
-	print(" ")
-	print("Usage: 'python pythondig.py [A, NS, TXT, MX, CNAME] google.com facebook.com'")
-	print(" ") 
-	print("Example: 'python pythondig.py A google.com facebook.com'")
-	quit()
+    if not internet_on():
+            print("Unable to connect to network")
+            quit()
 
 
-argument = sys.argv[1].upper()
- 
-if argument in ("NS", "A", "TXT", "MX", "CNAME"):
-	myResolver = dns.resolver.Resolver()
-	for hosts in sys.argv[2:]:
-		resolved_hosts = myResolver.query(hosts, argument)
-	for rdata in resolved_hosts:
-		print(rdata)
-	quit()
-else:
-        myResolver = dns.resolver.Resolver()
-        for hosts in sys.argv[1:]:
-                resolved_hosts = myResolver.query(hosts, "A")
-        for rdata in resolved_hosts:
-                print(rdata)
-        quit()
+    #help 
+    if sys.argv[1].lower() == "help":
+            print(" ")
+            print("Arguments: [A, NS, TXT, MX, CNAME")
+            print(" ")
+            print("Usage: 'python pythondig.py [A, NS, TXT, MX, CNAME] google.com facebook.com'")
+            print(" ") 
+            print("Example: 'python pythondig.py A google.com facebook.com'")
+            quit()
 
+
+    argument = sys.argv[1].upper()
+     
+    if argument in ("NS", "A", "TXT", "MX", "CNAME"):
+            myResolver = dns.resolver.Resolver()
+            for hosts in sys.argv[2:]:
+                    resolved_hosts = myResolver.query(hosts, argument)
+            for rdata in resolved_hosts:
+                    print(rdata)
+            quit()
+    else:
+            myResolver = dns.resolver.Resolver()
+            for hosts in sys.argv[1:]:
+                    resolved_hosts = myResolver.query(hosts, "A")
+            for rdata in resolved_hosts:
+                    print(rdata)
+            quit()
+
+
+    if sys.argv[1].lower() == "":
+            print(" ")
+            print("Arguments: [A, NS, TXT, MX, CNAME")
+            print(" ")
+            print("Usage: 'python pythondig.py [A, NS, TXT, MX, CNAME] google.com facebook.com'")
+            print(" ") 
+            print("Example: 'python pythondig.py A google.com facebook.com'")
+            quit()
+except IndexError:
+    print(" ")
+    print("Arguments: [A, NS, TXT, MX, CNAME")
+    print(" ")
+    print("Usage: 'python pythondig.py [A, NS, TXT, MX, CNAME] google.com facebook.com'")
+    print(" ") 
+    print("Example: 'python pythondig.py A google.com facebook.com'")
+    quit()       
