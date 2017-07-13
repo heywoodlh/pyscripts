@@ -5,5 +5,5 @@ pyparsing==2.2.0
 requests==2.14.2
 scapy-python3==0.21
 six==1.10.0
-slackclient==1.0.5
+slacker==0.9.50
 websocket-client==0.40.0
