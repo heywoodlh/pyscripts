@@ -1,4 +1,6 @@
 appdirs==1.4.3
+beautifulsoup4==4.6.0
+bs4==0.0.1
 dnspython==1.15.0
 httplib2==0.10.3
 packaging==16.8
